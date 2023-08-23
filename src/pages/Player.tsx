@@ -2,18 +2,21 @@ import { MessageCircle } from "lucide-react";
 import { Header } from "../components/Header";
 import { Video } from "../components/Video";
 import { Module } from "../components/Module";
-import { useAppDispatch, useAppSelector, useCurrentLesson } from "../store";
+import { useCurrentLesson, useStore } from "../zustand-store";
 import { useEffect } from "react";
-import { loadCourse } from "../store/slices/player";
 
 export function Player() {
-  const dispatch = useAppDispatch();
-  const modules = useAppSelector((state) => state.player.course?.modules);
+  const { course, load } = useStore((store) => {
+    return {
+      course: store.course,
+      load: store.load,
+    };
+  });
 
   const { currentLesson } = useCurrentLesson();
 
   useEffect(() => {
-    dispatch(loadCourse())
+    load();
   }, []);
 
   useEffect(() => {
@@ -39,15 +42,14 @@ export function Player() {
             <Video />
           </div>
           <aside className="w-80 absolute top-0 right-0 bottom-0 border-l border-zinc-800 bg-zinc-900 overflow-y-scroll scrollbar-thin scrollbar-track-zinc-950 scrollbar-thumb-zinc-800 divide-y-2 divide-zinc-900">
-            {modules &&
-              modules.map((module, index) => (
-                <Module
-                  key={module.id}
-                  moduleIndex={index}
-                  title={module.title}
-                  lessonsAmount={module.lessons.length}
-                />
-              ))}
+            {course?.modules.map((module, index) => (
+              <Module
+                key={module.id}
+                moduleIndex={index}
+                title={module.title}
+                lessonsAmount={module.lessons.length}
+              />
+            ))}
           </aside>
         </main>
       </div>
