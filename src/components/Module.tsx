@@ -1,7 +1,7 @@
 import { ChevronDown } from "lucide-react";
 import * as Collapsible from "@radix-ui/react-collapsible";
 import { Lesson } from "./Lesson";
-import { useStore } from "../zustand-store";
+import { useStore } from "../store";
 
 type ModuleProps = {
   title: string;
@@ -56,3 +56,11 @@ export function Module({ title, lessonsAmount, moduleIndex }: ModuleProps) {
     </Collapsible.Root>
   );
 }
+
+// 1. Nome
+// 2. Localização
+
+// Joao: staart > projeto cadastral
+// Aline: staart > projeto do pantera negra
+// Eric: Arquiteto já foi TechLead
+// Maria: SM (Scrum Master)

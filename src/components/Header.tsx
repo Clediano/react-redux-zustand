@@ -1,4 +1,4 @@
-import { useCurrentLesson, useStore } from "../zustand-store";
+import { useCurrentLesson, useStore } from "../store";
 
 export function Header() {
   const isLoading = useStore((store) => store.isLoading);
